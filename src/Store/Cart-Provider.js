@@ -85,6 +85,9 @@ const cartReducer=(state,action)=>{
         }
 
     }
+    if(action.type==="RESET-CART"){
+        return defaultCart
+    }
     return defaultCart
 }
 const CartProvider=(props)=>{
@@ -107,12 +110,19 @@ const CartProvider=(props)=>{
             item:item
            })
     }
+    const resetHandler=()=>{
+        dispatchCartAction({
+            type:"RESET-CART"
+        
+           })
+    }
     const cartContext={
         items:cart.items,
         totalAmount:cart.totalAmount,
         addItem:addItemHanlder,
         removeItem:removeItemHandler,
-        addSingleItem:addSingleItemHandler
+        addSingleItem:addSingleItemHandler,
+        reset:resetHandler
     }
     return(
         <CartContext.Provider value={cartContext}>
